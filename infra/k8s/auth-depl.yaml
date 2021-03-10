@@ -5,7 +5,7 @@ metadata:
 spec:
   replicas: 1
   selector:
-    metchLabels:
+    matchLabels:
       app: auth
   template:
     metadata:
