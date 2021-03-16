@@ -27,11 +27,6 @@ export class User extends UserModel {
   }
 }
 
-const user = new User({
-  email: "test@test.com",
-  password: "password"
-});
-
 //old solution
 /* 
 import mongoose from "mongoose";
