@@ -42,7 +42,7 @@ router.post(
         id: user.id,
         email: user.email
       },
-      "asdf"
+      process.env.JWT_KEY! // add "!" to tell ts it is checked
     );
 
     //Store JWT on session object
