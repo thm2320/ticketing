@@ -5,6 +5,7 @@ import cookieSession from "cookie-session";
 import { errorHandler, NotFoundError, currentUser } from "@thmtickets/common";
 import { createTicketRouter } from "./routes/new";
 import { showTicketRouter } from "./routes/show";
+import { indexTicketRouter } from "./routes/index";
 
 const app = express();
 app.set("trust proxy", true); //tell express to trust the proxy from ingress-nginx
@@ -20,6 +21,7 @@ app.use(currentUser);
 
 app.use(createTicketRouter);
 app.use(showTicketRouter);
+app.use(indexTicketRouter);
 
 //all will make it available to all http methods
 app.all("*", async (req, res, next) => {
