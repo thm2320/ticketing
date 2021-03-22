@@ -47,7 +47,7 @@ process.on("SIGIERM", () => {
   stan.close();
 });
 
-abstract class name {
+abstract class Listener {
   abstract subject: string;
   abstract queueGroupName: string;
   abstract onMessage(data: any, msg: Message): void;
