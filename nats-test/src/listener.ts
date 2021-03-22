@@ -15,26 +15,7 @@ stan.on("connect", () => {
     process.exit();
   });
 
-  const options = stan
-    .subscriptionOptions()
-    .setManualAckMode(true)
-    .setDeliverAllAvailable() //will deliver all events from seq 1 to now when the listener start up
-    .setDurableName("accounting-service");
-
-  const subscription = stan.subscribe(
-    "ticket:created",
-    "queue-group-name", // work will with setDurableName (not to receive the duplicated data )
-    options
-  );
-  subscription.on("message", (msg: Message) => {
-    const data = msg.getData();
-
-    if (typeof data === "string") {
-      console.log(`Received event #${msg.getSequence()}, with data: ${data}`);
-    }
-
-    msg.ack();
-  });
+  new TicketCreateListener(stan).listen();
 });
 
 process.on("SIGINT", () => {
@@ -86,5 +67,16 @@ abstract class Listener {
     return typeof data === "string"
       ? JSON.parse(data)
       : JSON.parse(data.toString("utf8"));
+  }
+}
+
+class TicketCreateListener extends Listener {
+  subject = "ticket:created";
+  queueGroupName = "payments-service";
+
+  onMessage(data: any, msg: Message) {
+    console.log("Event data!", data);
+
+    msg.ack();
   }
 }
