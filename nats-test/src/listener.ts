@@ -15,11 +15,15 @@ stan.on("connect", () => {
     process.exit();
   });
 
-  const options = stan.subscriptionOptions().setManualAckMode(true);
+  const options = stan
+    .subscriptionOptions()
+    .setManualAckMode(true)
+    .setDeliverAllAvailable() //will deliver all events from seq 1 to now when the listener start up
+    .setDurableName("accounting-service");
 
   const subscription = stan.subscribe(
     "ticket:created",
-    "listenerQueueGroup",
+    "queue-group-name", // work will with setDurableName (not to receive the duplicated data )
     options
   );
   subscription.on("message", (msg: Message) => {
