@@ -1,0 +1,32 @@
+// Create Ticket
+POST https://ticketing.dev/api/tickets
+Content-Type: application/json
+
+{
+    "title":"concert",
+    "price":10
+}
+
+###
+
+@ticketId = 605bf44a6d3a2900180702b7
+// Update Ticket
+PUT https://ticketing.dev/api/tickets/{{ticketId}}
+Content-Type: application/json
+
+{
+    "title":"concert",
+    "price":12
+}
+
+###
+
+// Get Ticket by Id
+GET https://ticketing.dev/api/tickets/{{ticketId}}
+Content-Type: application/json
+
+###
+
+// Get Ticket List
+GET https://ticketing.dev/api/tickets
+Content-Type: application/json
