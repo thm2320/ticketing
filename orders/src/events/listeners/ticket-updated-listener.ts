@@ -16,6 +16,11 @@ export class TicketUpdatedListener extends Listener<TicketUpdatedEvent> {
 
     const { title, price } = data;
     ticket.set({ title, price });
+    //Another way to do OCC
+    /* 
+    const { title, price, version } = data;
+    ticket.set({ title, price, version }); 
+    */
     await ticket.save();
 
     msg.ack();
