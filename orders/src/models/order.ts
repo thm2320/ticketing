@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 import { OrderStatus } from "@thmtickets/common";
 import { TicketDoc } from "./ticket";
 
@@ -11,9 +12,9 @@ interface OrderAttrs {
   ticket: TicketDoc;
 }
 
-type OrderDoc = mongoose.Document & OrderAttrs;
+type OrderDoc = mongoose.Document & OrderAttrs & { version: number };
 
-const OrderSchema = new mongoose.Schema<OrderDoc>(
+const orderSchema = new mongoose.Schema<OrderDoc>(
   {
     userId: {
       type: String,
@@ -43,7 +44,10 @@ const OrderSchema = new mongoose.Schema<OrderDoc>(
   }
 );
 
-const OrderModel = mongoose.model<OrderDoc>("Order", OrderSchema);
+orderSchema.set("versionKey", "version");
+orderSchema.plugin(updateIfCurrentPlugin);
+
+const OrderModel = mongoose.model<OrderDoc>("Order", orderSchema);
 
 export class Order extends OrderModel {
   constructor(attrs: OrderAttrs) {
