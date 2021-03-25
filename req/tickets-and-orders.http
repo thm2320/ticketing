@@ -1,3 +1,5 @@
+@ticketId = 605c7d18a739430018993147
+
 // Create Ticket
 POST https://ticketing.dev/api/tickets
 Content-Type: application/json
@@ -9,7 +11,6 @@ Content-Type: application/json
 
 ###
 
-@ticketId = 605bf44a6d3a2900180702b7
 // Update Ticket
 PUT https://ticketing.dev/api/tickets/{{ticketId}}
 Content-Type: application/json
@@ -30,3 +31,14 @@ Content-Type: application/json
 // Get Ticket List
 GET https://ticketing.dev/api/tickets
 Content-Type: application/json
+
+
+###
+
+// Create Order
+POST https://ticketing.dev/api/orders
+Content-Type: application/json
+
+{
+    "ticketId":"{{ticketId}}"
+}
