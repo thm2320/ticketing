@@ -5,7 +5,7 @@ import { OrderStatus } from "@thmtickets/common";
 export { OrderStatus };
 
 interface OrderAttrs {
-  id: string;
+  _id: string;
   version: number;
   userId: string;
   price: number;
