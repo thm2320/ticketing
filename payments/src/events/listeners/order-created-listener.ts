@@ -8,8 +8,6 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
   queueGroupName = queueGroupName;
 
   async onMessage(data: OrderCreatedEvent["data"], msg: Message) {
-    console.log(data);
-    console.log(data.ticket.price);
     const order = new Order({
       _id: data.id,
       price: data.ticket.price,
