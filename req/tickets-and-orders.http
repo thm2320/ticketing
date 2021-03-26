@@ -1,4 +1,5 @@
-@ticketId = 605c7d18a739430018993147
+@ticketId = 605db6d6671d640018c96656
+@orderId = 605db6e2a55220003bb0bcac
 
 // Create Ticket
 POST https://ticketing.dev/api/tickets
@@ -16,8 +17,8 @@ PUT https://ticketing.dev/api/tickets/{{ticketId}}
 Content-Type: application/json
 
 {
-    "title":"concert",
-    "price":12
+    "title":"concert 3",
+    "price":120
 }
 
 ###
@@ -42,3 +43,9 @@ Content-Type: application/json
 {
     "ticketId":"{{ticketId}}"
 }
+
+###
+
+// Get Order by Id
+Get https://ticketing.dev/api/orders/{{orderId}}
+Content-Type: application/json
