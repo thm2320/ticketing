@@ -40,6 +40,14 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
+    - image: thm2320/payments
+      context: payments
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
     - image: thm2320/client
       context: client
       docker:
