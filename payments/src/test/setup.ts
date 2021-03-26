@@ -3,6 +3,11 @@ import mongoose from "mongoose";
 import request from "supertest";
 import { app } from "../app";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config({
+  path: ".env.test"
+});
 
 declare global {
   namespace NodeJS {
