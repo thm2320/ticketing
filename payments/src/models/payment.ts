@@ -38,7 +38,7 @@ const PaymentCls = mongoose.model<PaymentDoc, PaymentModel>(
   paymentSchema
 );
 
-export class Order extends PaymentCls {
+export class Payment extends PaymentCls {
   constructor(attrs: PaymentAttrs) {
     super(attrs);
   }
