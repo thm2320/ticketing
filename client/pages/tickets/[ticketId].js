@@ -1,5 +1,6 @@
 import Router from "next/router";
 import useRequest from "../../hooks/use-request";
+import buildClient from "../../api/build-client";
 
 const TicketShow = ({ ticket }) => {
   const { doRequest, errors } = useRequest({
@@ -17,18 +18,19 @@ const TicketShow = ({ ticket }) => {
       <h1>{ticket.title}</h1>
       <h4>Price: {ticket.price}</h4>
       {errors}
-      <button onClick={doRequest} className="btn btn-primary">
+      <button onClick={() => doRequest()} className="btn btn-primary">
         Purchase
       </button>
     </div>
   );
 };
 
-TicketShow.getInitialProps = async (context, client) => {
+export async function getServerSideProps(context) {
+  const client = buildClient(context);
   const { ticketId } = context.query;
   const { data } = await client.get(`/api/tickets/${ticketId}`);
 
-  return { ticket: data };
-};
+  return { props: { ticket: data } };
+}
 
 export default TicketShow;

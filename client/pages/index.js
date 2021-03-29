@@ -1,6 +1,9 @@
 import Link from "next/link";
+import buildClient from "../api/build-client";
 
 const LandingPage = ({ tickets, currentUser }) => {
+  console.log(tickets);
+  console.log(currentUser);
   const ticketList = tickets.map((ticket) => {
     return (
       <tr key={ticket.id}>
@@ -32,10 +35,11 @@ const LandingPage = ({ tickets, currentUser }) => {
   );
 };
 
-LandingPage.getInitialProps = async (context, client, currentUser) => {
+export async function getServerSideProps(context) {
+  const client = buildClient(context);
   const { data } = await client.get("/api/tickets");
 
-  return { tickets: data };
-};
+  return { props: { tickets: data } };
+}
 
 export default LandingPage;
